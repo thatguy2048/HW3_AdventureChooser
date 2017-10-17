@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">AdventureChooser</string>
+
+    <string-array name="continents">
+        <item>Africa</item>
+        <item>Antartica</item>
+        <item>Asia</item>
+        <item>Europe</item>
+        <item>North America</item>
+        <item>Oceania</item>
+        <item>South America</item>
+    </string-array>
+
+    <string-array name="africa_images">
+        <item>https://www.smallerearth.com/system/photos/12268/original/africa.jpg</item>
+        <item>https://i.gocollette.com/img/destination-page/africa/africa-continent/africa-continent-ms1.jpg?h=720&amp;w=1280&amp;la=en</item>
+        <item>http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/1l/x8/p01lx8vj.jpg</item>
+    </string-array>
+
+    <string-array name="antartica_images">
+        <item>https://brightcove04pmdo-a.akamaihd.net/5104226627001/5104226627001_5240543709001_5212830740001-vs.jpg?pubId=5104226627001&amp;videoId=5212830740001</item>
+        <item>https://www.nasa.gov/sites/default/files/thumbnails/image/cxq8xp_xcaauqs4.jpg</item>
+        <item>https://www.naturalworldsafaris.com/~/media/images/destinations/antarctica/nws-st-antarctica-icebergs-2.ashx</item>
+    </string-array>
+
+    <string-array name="asia_images">
+        <item>https://lonelyplanetimages.imgix.net/a/g/hi/t/31ea94a136bd3d560ffc8d51c67de4ac-asia.jpg?sharp=10&amp;vib=20&amp;w=1200</item>
+        <item>http://media.royalcaribbean.com/content/shared_assets/images/destinations/regions/hero/asia_02.jpg</item>
+        <item>https://studylink.com/wp-content/uploads/2014/03/asia-china.jpg</item>
+    </string-array>
+
+    <string-array name="europe_images">
+        <item>http://www.nationalgeographicexpeditions.com/assets/images/6853/hero-interior.jpg</item>
+        <item>https://image.jimcdn.com/app/cms/image/transf/dimension=1190x10000:format=jpg/path/sa6549607c78f5c11/image/i2c81a69087b406ef/version/1456237268/most-beautiful-landscapes-in-europe-hallstatt-copyright-canadastock-european-best-destinations.jpg</item>
+        <item>https://www.eurail.com/sites/eurail.com/files/styles/asset_image_responsive_common_big_image/public/eiffel_tower_in_the_summer_paris_france.jpg?itok=KFna2q9v</item>
+    </string-array>
+
+    <string-array name="northamerica_images">
+        <item>https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg</item>
+        <item>https://brightcove04pmdo-a.akamaihd.net/5104226627001/5104226627001_5230047963001_5203640497001-vs.jpg?pubId=5104226627001&amp;videoId=5203640497001</item>
+        <item>http://kids.nationalgeographic.com/content/dam/kids/photos/Countries/H-P/mexico-mexico-city.ngsversion.1396531703727.jpg</item>
+    </string-array>
+
+    <string-array name="oceania_images">
+        <item>http://www.australia.com/etc/designs/tourismaustralia/clientlibs/imgs/fallback/kangaroo_600_600.jpg</item>
+        <item>http://south-seas-adventures.com/sites/default/files/country-cover-photo/2017-01/new-zealand.jpg</item>
+        <item>http://diveprice.com/wp-content/uploads/2016/01/Philippines-on-a-budget.jpg</item>
+    </string-array>
+
+    <string-array name="southamerica_images">
+        <item>https://www.rei.com/adventures/assets/adventures/images/trip/gallery/latinamerica/mpv_05</item>
+        <item>http://i2.cdn.turner.com/money/dam/assets/160408072953-rio-de-janeiro-brazil-780x439.jpg</item>
+        <item>http://cdn.bootsnall.com/locations/South-America-thumb.jpg</item>
+    </string-array>
+</resources>
