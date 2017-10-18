@@ -12,13 +12,18 @@ public class ImageDownloaderPrameters {
     ImageView imageToPlace;
     Bitmap btmp;
 
+    protected boolean already_set = false;
+
     public ImageDownloaderPrameters(String imageUrl, ImageView imageToPlace) {
         this.imageUrl = imageUrl;
         this.imageToPlace = imageToPlace;
     }
 
     public void setImageFromBitmap(){
-        imageToPlace.setImageBitmap(btmp);
+        if(btmp != null && imageToPlace != null && !already_set) {
+            already_set = true;
+            imageToPlace.setImageBitmap(btmp);
+        }
     }
 
     public void setImageFromBitmap(Bitmap bitmap){

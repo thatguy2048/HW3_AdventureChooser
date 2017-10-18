@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
@@ -27,6 +29,7 @@ public class Continent extends AppCompatActivity {
     public Button titleButton;
 
     protected ArrayList<ImageDownloaderPrameters> dl_parameters;
+    protected ListView imageListView;
 
     public AlertDialog.Builder selectDialogBuilder;
     public AlertDialog selectContinentDialog;
@@ -35,12 +38,34 @@ public class Continent extends AppCompatActivity {
         Log.d("AC_CONTINENT", toLog);
     }
 
+    public void onFinishedLoadingListView(){
+        LOGD("Finished Loading List View");
+        for(int i = 0; i < dl_parameters.size(); ++i){
+            dl_parameters.get(i).setImageFromBitmap();
+        }
+    }
+
+    void setupImageListView(ArrayList<ImageDownloaderPrameters> dlParams){
+        imageListView = (ListView)findViewById(R.id.continent_image_list);
+        ContinentImageArrayAdapter caa = new ContinentImageArrayAdapter(this, R.layout.continent_image_list_item, dlParams);
+
+        imageListView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+                imageListView.removeOnLayoutChangeListener(this);
+                LOGD("On Layout Change");
+                onFinishedLoadingListView();
+            }
+        });
+        imageListView.setAdapter(caa);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_continent);
 
-        mainLayout = (LinearLayout) findViewById(R.id.scroll_layout);
+        //mainLayout = (LinearLayout) findViewById(R.id.scroll_layout);
         titleButton = (Button)findViewById(R.id.title_button);
 
         selectDialogBuilder = new AlertDialog.Builder(Continent.this);
@@ -88,33 +113,40 @@ public class Continent extends AppCompatActivity {
             image_downloaders = new ArrayList<>();
             dl_parameters = new ArrayList<>();
 
-            for(int i = 0; i < image_urls.length; ++i){
-                LOGD("URL: "+image_urls[i]);
+            for(int i = 0; i < image_urls.length; ++i) {
+                LOGD("URL: " + image_urls[i]);
 
                 ImageDownloaderPrameters idp = new ImageDownloaderPrameters(
                         image_urls[i],
-                        new ImageView(this)
+                        null
                 );
 
                 dl_parameters.add(idp);
+            }
 
-                idp.imageToPlace.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                LOGD("Add View");
-                mainLayout.addView(idp.imageToPlace);
+            setupImageListView(dl_parameters);
 
-                if(savedInstanceState != null){
+            for(int i = 0; i < image_urls.length; ++i) {
+                if (savedInstanceState != null) {
                     LOGD("Loading From Saved Instance");
                     byte[] idta = savedInstanceState.getByteArray(image_urls[i]);
-                    idp.setImageFromBitmap(
-                            BitmapFactory.decodeByteArray(idta, 0, idta.length)
-                    );
-                }else {
+                    if(idta != null) {
+                        LOGD("Loading: "+image_urls[i]);
+                        Bitmap tmp_btmp = BitmapFactory.decodeByteArray(idta, 0, idta.length);
+                        if(tmp_btmp != null){
+                            //dl_parameters.get(i).setImageFromBitmap(tmp_btmp);
+                            dl_parameters.get(i).btmp = tmp_btmp;
+                        }
+                    }
+                } else {
                     LOGD("Start Download");
                     ImageDownloader id = new ImageDownloader();
-                    id.execute(idp);
+                    id.execute(dl_parameters.get(i));
                     image_downloaders.add(id);
                 }
             }
+
+
             LOGD("Finished OnCreate");
         }
     }
@@ -131,8 +163,9 @@ public class Continent extends AppCompatActivity {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 dl_parameters.get(i).btmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                 outState.putByteArray(dl_parameters.get(i).imageUrl, baos.toByteArray());
-                LOGD("Saved"+dl_parameters.get(i).imageUrl);
+                LOGD("Saved: "+dl_parameters.get(i).imageUrl);
             }
         }
+        LOGD("Finished Saving");
     }
 }
